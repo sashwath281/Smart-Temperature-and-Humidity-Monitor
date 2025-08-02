@@ -33,7 +33,7 @@ This project displays temperature and humidity on a 16x2 LCD using a DHT11 senso
 ## How It Works
 1. Reads temperature & humidity from DHT11 sensor.
 2. Displays readings on LCD.
-3. If temperature > 30°C, relay turns on buzzer.
+3. If temperature > 24°C, relay turns on buzzer.
 4. Delay of 3 seconds before next reading.
 
 ---
