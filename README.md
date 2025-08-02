@@ -1,10 +1,10 @@
 # Smart Temperature and Humidity Monitor using Arduino Uno
 
-This project displays temperature and humidity on a 16x2 LCD using a DHT11 sensor, and triggers a buzzer through a relay when the temperature exceeds 30°C.
+This project displays temperature and humidity on a 16x2 LCD using a DHT11 sensor, and triggers a buzzer through a relay when the temperature exceeds 24°C.
 
 ---
 
-## 🔧 Components Used
+## Components Used
 - Arduino Uno
 - DHT11 Temperature & Humidity Sensor
 - 16x2 LCD Display with I2C module
@@ -15,14 +15,14 @@ This project displays temperature and humidity on a 16x2 LCD using a DHT11 senso
 
 ---
 
-## 📷 Project Photos
+## Project Photos
 | Code Running | Sensor Close-up |
 |--------------|-----------------|
 | ![code](code%20photo.jpg) | ![sensor](photo%20of%20dht11.jpg) |
 
-| LCD Reading | LCD With Buzzer ON |
-|-------------|--------------------|
-| ![off](screen%20view%202.jpg) | ![on](screen%20view.jpg) |
+| LCD With Buzzer ON |
+|--------------------|
+| ![on](screen%20view.jpg) |
 
 | Top View |
 |----------|
@@ -30,7 +30,7 @@ This project displays temperature and humidity on a 16x2 LCD using a DHT11 senso
 
 ---
 
-## 🔌 How It Works
+## How It Works
 1. Reads temperature & humidity from DHT11 sensor.
 2. Displays readings on LCD.
 3. If temperature > 30°C, relay turns on buzzer.
@@ -38,7 +38,7 @@ This project displays temperature and humidity on a 16x2 LCD using a DHT11 senso
 
 ---
 
-## ▶️ Run the Code
+## Run the Code
 Upload the `.ino` file to your Arduino Uno using the Arduino IDE.
 
 ---
