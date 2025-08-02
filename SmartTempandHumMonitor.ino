@@ -33,7 +33,7 @@ void loop() {
 
   // Trigger buzzer via relay (active-low logic)
   lcd.setCursor(10, 1);
-  if (temp > 30) {
+  if (temp > 24) {
     digitalWrite(RELAY_PIN, LOW);    // LOW turns buzzer ON
     lcd.print("ON ");
   } else {
