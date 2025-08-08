@@ -38,11 +38,6 @@ This project displays temperature and humidity on a 16x2 LCD using a DHT11 senso
 
 ---
 
-## Run the Code
-Upload the `.ino` file to your Arduino Uno using the Arduino IDE.
-
----
-
 ## 📁 Files
 - `SmartTempMonitor.ino` - Arduino code
 - `README.md` - This project explanation
