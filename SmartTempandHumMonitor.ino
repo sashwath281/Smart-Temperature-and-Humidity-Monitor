@@ -1,46 +1,47 @@
 #include <DHT.h>
 #include <LiquidCrystal.h>
 
-#define DHTPIN 2          // Pin where the DHT11 is connected
-#define DHTTYPE DHT11     // Define sensor type
-#define RELAY_PIN 7       // Pin connected to relay module
+#define DHTPIN 2
+#define DHTTYPE DHT11
+#define RELAY_PIN 7
 
 DHT dht(DHTPIN, DHTTYPE);
-LiquidCrystal lcd(12, 11, 5, 4, 3, 6);  // RS, EN, D4, D5, D6, D7
+LiquidCrystal lcd(12, 11, 5, 4, 3, 6);
+
+void printFixed(const char* label, float val, const char* unit, uint8_t col, uint8_t row) {
+  lcd.setCursor(col, row);
+  lcd.print(label);
+  if (isnan(val)) {
+    lcd.print("--  ");
+  } else {
+    int v = (int)round(val);
+    if (v < 10) lcd.print(" "); 
+    lcd.print(v);
+    lcd.print(unit);
+  }
+}
 
 void setup() {
-  lcd.begin(16, 2);           // Initialize 16x2 LCD
-  dht.begin();                // Initialize DHT sensor
-  pinMode(RELAY_PIN, OUTPUT); 
-  digitalWrite(RELAY_PIN, HIGH); // Start with buzzer OFF (active-low)
+  lcd.begin(16, 2);
+  dht.begin();
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, HIGH);
+  lcd.clear();
+  lcd.setCursor(0,0); lcd.print("Temp/Humidity");
 }
 
 void loop() {
   float temp = dht.readTemperature();
-  float hum = dht.readHumidity();
+  float hum  = dht.readHumidity();
 
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("T:");
-  lcd.print(temp);
-  lcd.print((char)223);       // Degree symbol
-  lcd.print("C ");
+  printFixed("T:", temp, "\xDF""C", 0, 1);
+  printFixed("  H:", hum, "%",   7, 1);
 
-  lcd.setCursor(0, 1);
-  lcd.print("H:");
-  lcd.print(hum);
-  lcd.print("% ");
+  bool hot = (!isnan(temp) && temp > 24.0);
+  digitalWrite(RELAY_PIN, hot ? LOW : HIGH);
 
-  // Trigger buzzer via relay (active-low logic)
-  lcd.setCursor(10, 1);
-  if (temp > 24) {
-    digitalWrite(RELAY_PIN, LOW);    // LOW turns buzzer ON
-    lcd.print("ON ");
-  } else {
-    digitalWrite(RELAY_PIN, HIGH);   // HIGH turns buzzer OFF
-    lcd.print("OFF");
-  }
+  lcd.setCursor(13, 0);
+  lcd.print(hot ? "ON " : "OFF");
 
-  delay(3000);  // Wait before next reading
+  delay(3000);
 }
-
